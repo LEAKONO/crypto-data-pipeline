@@ -17,7 +17,12 @@ from datetime import datetime, timezone
 # ─────────────────────────────────────────────
 import requests
 import pandas as pd
+import sys
+from pathlib import Path
 
+# Add project root to sys.path so 'config' can be imported
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 # ─────────────────────────────────────────────
 # INTERNAL IMPORTS
 # ─────────────────────────────────────────────
