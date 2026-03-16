@@ -1,0 +1,21 @@
+# ── Data fetching ──
+requests==2.31.0          
+
+# ── Data manipulation ──
+pandas==2.2.0             
+numpy==1.26.4            
+
+# ── Snowflake connection ──
+snowflake-connector-python==3.7.0   
+snowflake-sqlalchemy==1.5.1         #
+# ── Apache Airflow ──
+apache-airflow==2.10.4
+# ── Environment variable management ──
+python-dotenv==1.0.0      
+
+# ── Logging utilities ──
+colorlog==6.8.2           
+
+# ── Testing ──
+pytest==8.0.0            
+pytest-mock==3.12.0       
