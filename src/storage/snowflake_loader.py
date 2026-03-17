@@ -506,7 +506,7 @@ if __name__ == "__main__":
     from src.ingestion.coingecko_ingest import run_ingestion
 
     print("\nRunning Stage 1 to get data …\n")
-    df = run_ingestion(coins_limit=10)
+    df = run_ingestion(coins_limit=100)
 
     print("\nRunning Stage 2 — loading into Snowflake …\n")
     stats = run_load(df)
