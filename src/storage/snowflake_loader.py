@@ -428,47 +428,23 @@ def verify_load(conn, expected_rows: int) -> bool:
 # FUNCTION 7 — run_load  (Airflow entry point)
 # ─────────────────────────────────────────────
 def run_load(df: pd.DataFrame) -> dict:
-    """
-    Orchestrates the full Stage 2 process:
-        1. Auto-setup Snowflake environment if needed
-        2. Prepare the DataFrame
-        3. Connect to Snowflake
-        4. Write data
-        5. Verify data landed
-        6. Close connection
 
-    This is the single function Apache Airflow calls.
-
-    Args:
-        df: Clean DataFrame from Stage 1
-
-    Returns:
-        dict: Load statistics
-    """
 
     logger.info("━" * 50)
     logger.info("STAGE 2 — Snowflake load started")
     logger.info("━" * 50)
-
-    # ── Step 1: Auto-create all Snowflake objects if missing ──
-    # This is safe to run every time — IF NOT EXISTS means
-    # it skips creation of anything that already exists
     validate_config()
     setup_snowflake_environment()
 
-    # ── Step 2: Prepare the DataFrame ─────────────────────
     df_prepared = prepare_dataframe(df)
 
     conn = None
 
     try:
-        # ── Step 3: Open the full connection ──────────────
         conn = get_snowflake_connection()
 
-        # ── Step 4: Write to Snowflake ────────────────────
         load_stats = load_to_snowflake(df_prepared, conn)
 
-        # ── Step 5: Verify data landed ────────────────────
         verify_load(conn, expected_rows=len(df_prepared))
 
         logger.info(
@@ -492,9 +468,6 @@ def run_load(df: pd.DataFrame) -> dict:
             logger.info("Snowflake connection closed")
 
 
-# ─────────────────────────────────────────────
-# MAIN BLOCK — standalone test runner
-# ─────────────────────────────────────────────
 if __name__ == "__main__":
 
     logging.basicConfig(

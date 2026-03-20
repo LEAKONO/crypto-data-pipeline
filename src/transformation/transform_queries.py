@@ -160,9 +160,6 @@ def run_transformations() -> None:
             logger.info("Snowflake connection closed")
 
 
-# ─────────────────────────────────────────────
-# MAIN BLOCK — standalone test runner
-# ─────────────────────────────────────────────
 if __name__ == "__main__":
 
     logging.basicConfig(
